@@ -1,396 +1,148 @@
-import React from 'react';
+import React, { Component } from 'react';
+import Daily from './components/Daily';
+import FiveDay from './components/FiveDay';
+// import SearchWeather from './components/SearchWeather';
 import './App.css';
 
-import {
-  BrowserRouter,
-  Route
-} from 'react-router-dom';
+// import {
+//   BrowserRouter,
+//   Route
+// } from 'react-router-dom';
 
-// App components
 
-import Daily from './components/Daily'
-import FiveDay from './components/FiveDay';
-import SearchWeather from './components/SearchWeather';
+class App extends Component {
 
-const App = () => (
-  <BrowserRouter>
-    <div className="container">
-      <Daily />
-      <Route exact path="/" component={Daily} />
-      <Route path="/fiveday" component={FiveDay}/> */}
-      <Route path="/searchweather" component={SearchWeather}/>
-    </div>
-  </BrowserRouter>
-);
+    constructor(props) {
+        super(props);
+        this.appid = "Your Open Weather Map API Key";
+        this.icon_address = "http://openweathermap.org/img/wn/"
+        this.city_name = 'Gilgit'
+        this.lat = '35.9221'
+        this.lon = '74.308701'
+        this.state = {
+            current_weather: {},
+            daily_weather: [],
+            forecast_weather: {},
+            sorted_forecast_data: {},
+            forecast_dates: [],
+            current_forecast_data:{
+                labels : [],
+                datasets: [{}]
+            },
+            showed_temperature : -1000
+        }
+    }
+
+    process_forecast_data = (list) => {
+        let fc_data_by_date = {};
+        let fc_dates = [];
+        list.map(item => {
+            let date_arr = item.dt_txt.split(" ");
+            let date = date_arr[0];
+            // Prepare data for line graph
+            if (date in fc_data_by_date){
+                let temp_obj = fc_data_by_date[date];
+                let labels = temp_obj.labels;
+                labels.push(item.dt_txt);
+                let data = temp_obj.datasets[0].data;
+                data.push(item.main.temp);
+            }else{
+                let obj = {
+                            labels : [item.dt_txt],
+                            datasets: [{
+                                label: "Forecast",
+                                colors: "rgba(245, 194, 66, 0.75)",
+                                backgroundColor: "rgba(245, 194, 66, 0.75)",
+                                data: [item.main.temp]
+                            }]
+                    }
+                fc_data_by_date[date] = obj;
+                fc_dates.push(date)
+            }
+        })
+
+        return {fc_data_by_date: fc_data_by_date, fc_dates: fc_dates};
+    }
+
+    async componentDidMount() {
+        let lat = this.lat;
+        let lon = this.lon;
+        const weather = await (await fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely&appid=${this.appid}&units=metric`)).json()
+        const weather_forecast = await (await fetch(`http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=metric&appid=${this.appid}`)).json()
+
+        let processed_data = this.process_forecast_data(weather_forecast.list)
+
+        this.setState({current_weather: weather.current,
+                            daily_weather: weather.daily.slice(0,6),
+                            forecast_weather: weather_forecast,
+                            sorted_forecast_data:processed_data.fc_data_by_date,
+                            forecast_dates: processed_data.fc_dates,
+                            showed_temperature: weather.current.temp});
+    }
+
+    convert_temperature = (conversion_request) => {
+        const {current_weather} = this.state;
+        const celsius = current_weather.temp;
+        return  conversion_request === 'f' ? celsius * 9 / 5 + 32 : celsius;
+    }
+
+    show_in_celsius = () => {
+        let celsius = this.convert_temperature('c');
+        this.setState({showed_temperature: celsius});
+    }
+
+    show_in_fahrenheit = () => {
+        let fahrenheit = this.convert_temperature('f');
+        this.setState({showed_temperature: fahrenheit});
+    }
+
+    convert_unix_to_date = (unix_timestamp, abbreviation=true) => {
+        let date = new Date(unix_timestamp * 1000);
+        let full_days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+        let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+        return abbreviation === false ? full_days[date.getDay()] : days[date.getDay()];
+    }
+
+    render() {
+        const {current_weather,
+            daily_weather,
+            showed_temperature,
+            forecast_dates,
+            sorted_forecast_data} = this.state;
+
+        if(current_weather.temp) {
+            return (
+                <div className="container">
+                    <Daily city_name={this.city_name}
+                                    convert_unix_to_date={this.convert_unix_to_date}
+                                    current_weather={current_weather}
+                                    showed_temperature={showed_temperature}
+                                    show_in_celsius={this.show_in_celsius}
+                                    show_in_fahrenheit={this.show_in_fahrenheit}
+                                    icon_address={this.icon_address}
+                    />
+
+                    <FiveDay daily_weather={daily_weather}
+                                    icon_address={this.icon_address}
+                                    convert_unix_to_date={this.convert_unix_to_date}
+                                    forecast_dates={forecast_dates}
+                                    sorted_forecast_data={sorted_forecast_data}
+                    />
+
+                </div>
+
+            );
+        }else{
+            return(
+                <div>
+                </div>
+            );
+        }
+
+    }
+}
+
 
 export default App;
-
-
-// // components
-
-// function App() {
-//   return (
-//     <div className="title">
-//       <h1>Hello World! This is Sadric</h1>
-
-//     </div>
-//   );
-// }
-
-
-
-// import {
-//   BrowserRouter as Router,
-//   Switch,
-//   Route,
-//   Link
-// } from "react-router-dom";
-
-
-// function App() {
-
-  // class App extends React.Component {
-  //   constructor(props) {
-  //     super(props);
-  //     this.state = {
-  //       data: {},
-  //       location: "Singapore",
-  //       days: [],
-  //       daysFull: [],
-  //       temps: [],
-  //       minTemps: [],
-  //       maxTemps: [],
-  //       weather: [],
-  //       icons: [],
-  //       displayIndex: 0
-  //     };
-  //   }
-  
-  //   fetchData = () => {
-  //     const url = this.buildUrlApi();
-  //     console.log("api", url);
-  
-  //     axios.get(url).then(response => {
-  //       this.setState({
-  //         data: response.data
-  //       });
-  
-  //       const currentData = this.currentData();
-  //       const dayOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-  //       const dayOfWeekFull = [
-  //         "Sunday",
-  //         "Monday",
-  //         "Tuesday",
-  //         "Wednesday",
-  //         "Thursday",
-  //         "Friday",
-  //         "Saturday"
-  //       ];
-  //       const currentDay = "Today";
-  //       const currentDayFull =
-  //         dayOfWeekFull[new Date(currentData.dt_txt).getDay()];
-  //       const currentTemp = Math.round(currentData.main.temp);
-  //       const currentMinTemp = Math.round(currentData.main.temp_min);
-  //       const currentMaxTemp = Math.round(currentData.main.temp_max);
-  //       const currentWeather =
-  //         currentData.weather[0].main === "Clouds"
-  //           ? "Cloudy"
-  //           : currentData.weather[0].main;
-  //       const currentIcon = this.convertWeatherIcons(currentData.weather[0].main);
-  
-  //       const days = [];
-  //       const daysFull = [];
-  //       const temps = [];
-  //       const minTemps = [];
-  //       const maxTemps = [];
-  //       const weather = [];
-  //       const icons = [];
-  //       for (let i = 0; i < this.state.data.list.length; i = i + 8) {
-  //         let date = new Date(this.state.data.list[i].dt_txt);
-  //         let day = dayOfWeek[date.getDay()];
-  //         let dayFull = dayOfWeekFull[date.getDay()];
-  //         days.push(day);
-  //         daysFull.push(dayFull);
-  //         temps.push(Math.round(this.state.data.list[i].main.temp));
-  //         minTemps.push(Math.round(this.state.data.list[i].main.temp_min));
-  //         maxTemps.push(Math.round(this.state.data.list[i].main.temp_max));
-  
-  //         if (this.state.data.list[i].weather[0].main === "Clouds") {
-  //           weather.push("Cloudy");
-  //         } else {
-  //           weather.push(this.state.data.list[i].weather[0].main);
-  //         }
-  
-  //         icons.push(
-  //           this.convertWeatherIcons(this.state.data.list[i].weather[0].main)
-  //         );
-  //       }
-  
-  //       this.setState({
-  //         days: [currentDay, ...days.slice(1)],
-  //         daysFull: [currentDayFull, ...daysFull.slice(1)],
-  //         temps: [currentTemp, ...temps.slice(1)],
-  //         minTemps: [currentMinTemp, ...minTemps.slice(1)],
-  //         maxTemps: [currentMaxTemp, ...maxTemps.slice(1)],
-  //         weather: [currentWeather, ...weather.slice(1)],
-  //         icons: [currentIcon, ...icons.slice(1)]
-  //       });
-  //     });
-  //   };
-  
-  //   buildUrlApi = () => {
-  //     const location = encodeURIComponent(this.state.location);
-  //     const urlPrefix = "https://api.openweathermap.org/data/2.5/forecast?q=";
-  //     const urlSuffix = "&APPID=fb1158dc7dfef5f0967ceac8f71ee3a6&units=metric";
-  
-  //     return [urlPrefix, location, urlSuffix].join("");
-  //   };
-  
-  //   currentData = () => {
-  //     const list = this.state.data.list;
-  //     const nearestHr = this.computeNearestHr();
-  
-  //     return list.find(e => new Date(e.dt_txt).getHours() === nearestHr);
-  //   };
-  
-  //   computeNearestHr = () => {
-  //     const currentTimeInHrs = new Date().getHours();
-  //     const constHrs = [0, 3, 6, 9, 12, 15, 18, 21];
-  //     const differences = constHrs.map(e => Math.abs(e - currentTimeInHrs));
-  //     const indexofLowestDiff = differences.indexOf(Math.min(...differences));
-  
-  //     return constHrs[indexofLowestDiff];
-  //   };
-  
-  //   convertWeatherIcons = weather => {
-  //     switch (weather) {
-  //       case "Clear":
-  //         return "circle-outline";
-  //       case "Clouds":
-  //         return "weather-cloudy";
-  //       case "Snow":
-  //         return "weather-snowy";
-  //       case "Rain":
-  //         return "weather-pouring";
-  //       case "Drizzle":
-  //         return "weather-pouring";
-  //       case "Thunderstorm":
-  //         return "weather-lightning-rainy";
-  //       default:
-  //         return "weather-cloudy";
-  //     }
-  //   };
-  
-  //   componentDidMount() {
-  //     this.fetchData();
-  //   }
-  
-  //   handleFocus = e => {
-  //     e.target.select();
-  //   }
-    
-  //   changeLocation = e => {
-  //     e.preventDefault();
-  //     const inputLocation = this.locationInput.value;
-  //     this.setState(
-  //       {
-  //         location: inputLocation
-  //       },
-  //       () => {
-  //         this.fetchData();
-  //       }
-  //     );
-  //   };
-  
-  //   setIndex = index => {
-  //     this.setState({
-  //       displayIndex: index
-  //     });
-  //   };
-  
-  //   render() {
-  //     const {
-  //       location,
-  //       days,
-  //       daysFull,
-  //       temps,
-  //       maxTemps,
-  //       minTemps,
-  //       weather,
-  //       icons,
-  //       displayIndex
-  //     } = this.state;
-  
-  //     let background = "";
-  //     switch (weather[displayIndex]) {
-  //       case "Clear":
-  //         background = "clear";
-  //         break;
-  //       case "Cloudy":
-  //         background = "cloudy";
-  //         break;
-  //       case "Snow":
-  //         background = "snow";
-  //         break;
-  //       case "Rain":
-  //         background = "rain";
-  //         break;
-  //       case "Drizzle":
-  //         background = "rain";
-  //         break;
-  //       case "Thunderstorm":
-  //         background = "thunderstorm";
-  //         break;
-  //       default:
-  //         background = "cloudy";
-  //     }
-  
-  //     return (
-  //       <div className={"widget ".concat(...background)}>
-  //         <form onSubmit={this.changeLocation}>
-  //    <div className="inline-input">
-  //             <i className="mdi mdi-magnify"></i>
-  //             <input
-  //               className="location-input"
-  //               defaultValue={location}
-  //               type="text"
-  //               onFocus={this.handleFocus}
-  //               ref={input => (this.locationInput = input)}
-  //             />
-  //           </div>
-  //         </form>
-  
-  //         <div className="main-display">
-  //           <div className="main-info">
-  //             <div className="temp-measurement">{temps[displayIndex]}</div>
-  //             <div className="temp-unit">°C</div>
-  //           </div>
-  
-  //           <div className="sub-info">
-  //             <div className="sub-info-title">{daysFull[displayIndex]}</div>
-  
-  //             <div className="sub-info-text">{weather[displayIndex]}</div>
-  
-  //             <div className="sub-info-text">
-  //               <span className="max-temp">
-  //                 <i className="mdi mdi-arrow-up" />
-  //                 {maxTemps[displayIndex]}
-  //                 °C
-  //               </span>
-  //               <span className="min-temp">
-  //                 <i className="mdi mdi-arrow-down" />
-  //                 {minTemps[displayIndex]}
-  //                 °C
-  //               </span>
-  //             </div>
-  //           </div>
-  //         </div>
-  
-  //         <div className="selection-panel">
-  //           <div className="selection-row">
-  //             {icons.map((item, index) => {
-  //               if (displayIndex === index) {
-  //                 return (
-  //                   <div
-  //                     className="selection-icons selected"
-  //                     key={index + 1}
-  //                     onClick={() => this.setIndex(index)}
-  //                   >
-  //                     <i className={"mdi mdi-".concat(item)} />
-  //                   </div>
-  //                 );
-  //               } else {
-  //                 return (
-  //                   <div
-  //                     className="selection-icons"
-  //                     key={index + 1}
-  //                     onClick={() => this.setIndex(index)}
-  //                   >
-  //                     <i className={"mdi mdi-".concat(item)} />
-  //                   </div>
-  //                 );
-  //               }
-  //             })}
-  //           </div>
-  //           <div className="selection-row">
-  //             {days.map((item, index) => {
-  //               if (displayIndex === index) {
-  //                 return (
-  //                   <div
-  //                     className="selection-days selected"
-  //                     key={index + 1}
-  //                     onClick={() => this.setIndex(index)}
-  //                   >
-  //                     {item}
-  //                   </div>
-  //                 );
-  //               } else {
-  //                 return (
-  //                   <div
-  //                     className="selection-days"
-  //                     key={index + 1}
-  //                     onClick={() => this.setIndex(index)}
-  //                   >
-  //                     {item}
-  //                   </div>
-  //                 );
-  //               }
-  //             })}
-  //           </div>
-  //         </div>
-  //       </div>
-  //     );
-  //   }
-  // }
-  
-  // ReactDOM.render(<App />, document.getElementById("root"));
-  
-// export default function SearchWeather() {
-//   return (
-//     <Router>
-//       <div>
-//         <nav>
-//           <ul>
-//             <li>
-//               <Link to="/">Home</Link>
-//             </li>
-//             <li>
-//               <Link to="/about">About</Link>
-//             </li>
-//             <li>
-//               <Link to="/users">Users</Link>
-//             </li>
-//           </ul>
-//         </nav>
-
-//         {/* A <Switch> looks through its children <Route>s and
-//             renders the first one that matches the current URL. */}
-//         <Switch>
-//           <Route path="/about">
-//             <About />
-//           </Route>
-//           <Route path="/users">
-//             <Users />
-//           </Route>
-//           <Route path="/">
-//             <Home />
-//           </Route>
-//         </Switch>
-//       </div>
-//     </Router>
-//   );
-// }
-
-// function Home() {
-//   return <h2>Home</h2>;
-// }
-
-// function About() {
-//   return <h2>About</h2>;
-// }
-
-// function Users() {
-//   return <h2>Users</h2>;
-// }
 
 
