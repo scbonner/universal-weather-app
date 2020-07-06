@@ -1,13 +1,10 @@
 import React, { Component } from 'react';
 import Daily from './components/Daily';
 import FiveDay from './components/FiveDay';
-// import SearchWeather from './components/SearchWeather';
+import Converter from './components/Converter';
 import './App.css';
 
-// import {
-//   BrowserRouter,
-//   Route
-// } from 'react-router-dom';
+
 
 
 class App extends Component {
@@ -15,7 +12,7 @@ class App extends Component {
     constructor(props) {
         super(props);
         this.appid = "Your Open Weather Map API Key";
-        this.icon_address = "http://openweathermap.org/img/wn/"
+        this.icon_address = "http://openweathermap.org/img/"
         this.city_name = 'Gilgit'
         this.lat = '35.9221'
         this.lon = '74.308701'
@@ -67,8 +64,8 @@ class App extends Component {
     async componentDidMount() {
         let lat = this.lat;
         let lon = this.lon;
-        const weather = await (await fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely&appid=${this.appid}&units=metric`)).json()
-        const weather_forecast = await (await fetch(`http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=metric&appid=${this.appid}`)).json()
+        const weather = await (await fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely&appid=${process.env.REACT_APP_WEATHER_KEY}&units=metric`)).json()
+        const weather_forecast = await (await fetch(`http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=metric&appid=${process.env.REACT_APP_WEATHER_KEY}`)).json()
 
         let processed_data = this.process_forecast_data(weather_forecast.list)
 
