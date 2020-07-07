@@ -15,7 +15,7 @@ const FiveDay = ({ match }) => (
         [...Array(5).keys()].map(n => {
             return <li key={n}>
                     <Link to={`${match.url}/${n+1}`}>
-                      Message {n+1}
+                      Converter {n+1}
                     </Link>
                   </li>;
         })

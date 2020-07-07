@@ -1,56 +1,61 @@
 import React, { Component } from 'react';
     // import logo from './logo.svg';
-    import './App.css';
-    
-    import {
-      Route,
-      Link,
-      Switch,
-      Redirect
-    } from 'react-router-dom';
-    
+import './App.css';
+
+import {
+    BrowserRouter,
+    Route,
+    Switch,
+    Redirect
+} from 'react-router-dom';
+
 // List of connecting components
 
-    // import Home from './components/Home';
-    import FiveDay from './components/FiveDay';
-    import Converter from './components/Converter';
-    // import Converter from './components/Converter';
+// import Home from './components/Home';
+import FiveDay from './components/FiveDay';
+import Converter from './components/Converter';
+import ErrorBoundary from './components/ErrorBoundary';
 
 
-    class App extends Component {
-      render() {
-        return (
-          <div className="App">
-            <header className="App-header">
-              {/* <img src={logo} className="App-logo" alt="logo" /> */}
-              <h1 className="App-title">Welcome to React</h1>
-            </header>
-            <div className="menu">
-                <ul>
-                  {/* <li> <Link to="/">Home</Link> </li> */}
-                  <li> <Link to="/fiveday">FiveDay</Link> </li>
-                  <li> <Link to="/converter">Converter</Link> </li>
-                  {/* <li> <Link to="/about">About</Link> </li> */}
-                </ul>
-            </div>
-            <div className="App-intro">
-              <Switch>
-                <Route exact path="/"  component={FiveDay} />
-                <Route path="/messages" component={Converter} />
-                {/* <Route path="/about" component={About} /> */}
-                <Redirect to="/" />
-              </Switch>
-            </div>
-          </div>
-        );
-      }
+class App extends Component {
+    render() {
+    return (
+        <div className="App">
+        <header className="App-header">
+            {/* <img src={logo} className="App-logo" alt="logo" /> */}
+            <h1 className="App-title">Welcome to React</h1>
+        </header>
+        {/* <div className="menu">
+            <ul>
+                {/* <li> <Link to="/">Home</Link> </li> */}
+                {/* <li> 
+                <Link to="/fiveday">FiveDay</Link> 
+                </li>
+                <li> <Link to="/converter">Converter</Link> 
+                </li>
+                <li> <Link to="/errorboundary">ErrorBoundary</Link> </li> 
+            </ul>
+        </div> */} 
+        <div className="App-intro">
+          <BrowserRouter>
+            <Switch>
+            <Route exact path="/"  component={FiveDay} />
+            <Route path="/converter" component={Converter} />
+            <Route path="/errorboundary" component={ErrorBoundary} /> 
+            <Redirect to="/" />
+            </Switch> 
+          </BrowserRouter>
+        </div>
+        </div>
+    );
     }
+}
+
+
     
- 
-       
-  
-  export default App;
-  
+
+export default App;
+
   
   
 //   import React, { Component } from 'react';
