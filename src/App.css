@@ -1,4 +1,4 @@
-/* /* Added Normalize to CSS file  */
+/* Added Normalize to CSS file 
 
 
 /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
@@ -18,37 +18,26 @@
   /* .App {
     text-align: center;
   } */
-  .App {
-    font-family: sans-serif;
-    text-align: center;
+
+
+  .appapp {
+    background-image: url('../images/cloudy.jpg');
+    background-size: cover;
+    background-position: bottom;
+    transition: 0.4 case-out
   }
-  
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-    height: 80px;
-  }
-  
-  .App-header {
-    background-color: #222;
-    height: 150px;
-    padding: 20px;
-    color: white;
-  }
-  
-  .App-title {
-    font-size: 1.5em;
-  }
-  
-  .App-intro {
-    font-size: large;
-  }
+
+  .app.warm {
+    background-image: url('../images/.thunderstorm');
+  } 
+
   
   @keyframes App-logo-spin {
     from { transform: rotate(0deg); }
     to { transform: rotate(360deg); }
   }
   
-  ul {
+  /* ul {
     list-style-type: none;
     padding: 0;
   }
@@ -71,7 +60,7 @@
     color: #fff;
     display: block;
   }
-   
+    */
 
  html {
   line-height: 1.15; /* 1 */
@@ -137,7 +126,7 @@ body {
     text-align: center;
 }
 
-.App {
+.app {
     height: 100vh;
     transition: all .3s ease-in-out;
     width: 100vw;
