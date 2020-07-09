@@ -298,7 +298,22 @@ class App extends React.Component {
     );
   }
 }
+/*Arrow Function
+ChangeCityName=(newName)=> {
+  this.setState({cityName:newName})
+  console.log(this.state.cityName)
+}
 
+  render() {
+    return(
+      <div>
+        <Title ChangeCityName={this.ChangeCityName}/>
+      </div>
+      
+    );
+}}
+
+<<<<<<< HEAD
 export default App;
 
 
@@ -400,3 +415,6 @@ export default App;
 
 
 // export default App;
+=======
+export default App; */
+>>>>>>> 9d85dcb24179548dc351e6d3d88aab6bbe2f270f
