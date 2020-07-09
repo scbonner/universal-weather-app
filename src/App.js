@@ -1,13 +1,29 @@
-import React from 'react';
-import './App.css';
+/* Created Two Components 
+import React, { Component } from 'react';
+import Title from  './components/Title.js';
+import Time from './components/Time.js';
 
-function App() {
-  return (
-    <div className="title">
-      <h1>Hello World! This is Sadric</h1>
+class App extends Component {
 
-    </div>
-  );
+constructor(){
+  super();
+  this.state = {
+    cityName: '',
+  }
+}
+/*Arrow Function
+ChangeCityName=(newName)=> {
+  this.setState({cityName:newName})
+  console.log(this.state.cityName)
 }
 
-export default App;
+  render() {
+    return(
+      <div>
+        <Title ChangeCityName={this.ChangeCityName}/>
+      </div>
+      
+    );
+}}
+
+export default App; */
