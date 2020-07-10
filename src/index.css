@@ -7,7 +7,7 @@
   
   
   body {
-  background-image: url('../src/assets/images/umbrellas.jpg');
+  background-image: url('../src/assets/images/umbrella_sunshine.jpg');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -138,7 +138,6 @@ main {
 .app.warm {
     background-image: url("../src/assets/icons/iconfinder_forecast_sun_weather_3763531.png");
   }
-n */
   
   @keyframes App-logo-spin {
     from { transform: rotate(0deg); }
@@ -154,15 +153,6 @@ n */
 /* Sections
    ========================================================================== */
 
-/**
- * Remove the margin in all browsers.
- */
-/* 
-body {
-  margin: 0;
-  text-align: center; */
-  
-  
 
 
 /**
