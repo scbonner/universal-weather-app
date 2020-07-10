@@ -6,13 +6,10 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
-<<<<<<< HEAD
     "axios": "^0.19.2",
     "bootstrap": "^4.5.0",
     "chartjs-react": "^2.0.1",
-=======
     "bootstrap": "^4.5.0",
->>>>>>> 9d85dcb24179548dc351e6d3d88aab6bbe2f270f
     "react": "^16.13.1",
     "react-bootstrap": "^1.1.0",
     "react-dom": "^16.13.1",
