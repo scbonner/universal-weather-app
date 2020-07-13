@@ -1,4 +1,5 @@
-import React, {Component} from 'react';
+import React, { Component } from "react";
+// import Hourly from './components/Hourly';
 import axios from 'axios';
 
 
@@ -296,6 +297,5 @@ class App extends React.Component {
    );
   }
 }
-
  
 export default App; 
