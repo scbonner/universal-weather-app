@@ -1,25 +1,32 @@
 import React, { Component } from "react";
-// import Hourly from './components/Hourly';
 import axios from 'axios';
+// eslint-disable-next-line
+import Hourly from './components/Hourly'
 
 
-class App extends React.Component {
+// class component
+class App extends Component {
+  // parameter
   constructor(props) {
+    // parameter
     super(props);
+    // list of properties
     this.state = {
-      data: {},
+      data: [],
       location: "Charlotte",
       days: [],
       daysFull: [],
       temps: [],
-      minTemps: [],
-      maxTemps: [],
+      // minTemps: [],
+      // maxTemps: [],
       weather: [],
-      icons: [],
-      displayIndex: 0
+      displayIndex: 0,
+      icons: []
+      
     };
   }
 
+  // function place to set up url
   fetchData = () => {
     const url = this.buildUrlApi();
     console.log("api", url);
@@ -55,8 +62,6 @@ class App extends React.Component {
       const days = [];
       const daysFull = [];
       const temps = [];
-      // const minTemps = [];
-      // const maxTemps = [];
       const weather = [];
       const icons = [];
       for (let i = 0; i < this.state.data.list.length; i = i + 8) {
@@ -84,8 +89,6 @@ class App extends React.Component {
         days: [currentDay, ...days.slice(1)],
         daysFull: [currentDayFull, ...daysFull.slice(1)],
         temps: [currentTemp, ...temps.slice(1)],
-        // minTemps: [currentMinTemp, ...minTemps.slice(1)],
-        // maxTemps: [currentMaxTemp, ...maxTemps.slice(1)],
         weather: [currentWeather, ...weather.slice(1)],
         icons: [currentIcon, ...icons.slice(1)]
       });
@@ -169,8 +172,6 @@ class App extends React.Component {
       days,
       daysFull,
       temps,
-      // maxTemps,
-      // minTemps,
       weather,
       icons,
       displayIndex

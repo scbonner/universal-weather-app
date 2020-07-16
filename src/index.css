@@ -46,6 +46,20 @@ code {
 /* ===================================
  ===========universal weather app */
 
+element.style {
+ width: 342px;
+}
+.forecasts__period {
+    flex-direction: row;
+    justify-content: center;
+    padding: 10px 0;
+}
+.forecasts .swiper-wrapper, .forecasts__period {
+    align-items: flex-start;
+    display: flex;
+}
+
+
 main {
   min-height: 100vh;
   background-image: linear-gradient bottom, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, .75)
