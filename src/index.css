@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 * {
   margin: 0;
   padding: 0;
@@ -6,17 +5,8 @@
 }
   
   
-  
-  body {
-=======
-body {
-  background-color: lightblue;
->>>>>>> 9d85dcb24179548dc351e6d3d88aab6bbe2f270f
-  margin: 0;
-  padding: 0;
-  font-family: sans-serif;
 
-<<<<<<< HEAD
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
@@ -125,14 +115,14 @@ main {
 
 
 .app {
-    background-image: url('../src/assets/images/umbrella_sunshine.jpg');
+   background-image: url('../src/assets/images/umbrella_sunshine.jpg');
     background-size: cover;
     background-position: bottom;
     transition: 0.4s ease;
   }
 
 .app.warm {
-    background-image: url("../src/assets/images/clouds.jpg");
+    background-image: url("../src/assets/icons/iconfinder_forecast_sun_weather_3763531.png");
   }
 
   
@@ -169,12 +159,12 @@ main {
   display: block;
 }
 
- 
 
-html,
-body {
+ html {
     align-items: center;
-    background-color: #f8f8f8 !important; 
+    background-image: url(./assets/images/umbrella_sunshine.jpg); 
+    background-position: no-repeat;
+    background: !important;
   
     color: #333;
     display: flex;
@@ -313,25 +303,39 @@ body {
     color: #fff;
     transition: all .3s ease-in-out;
 }
-
+/*linear-gradient(0deg, #004781, #2196f3);*/
 .cloudy {
-    background-image: linear-gradient(0deg, #bbdefb, #2196f3);
+    background-image: url(./assets/images/air-atmosphere.jpg); 
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .clear {
-    background-image: linear-gradient(0deg, #b3e5fc, #29b6f6);
+    /*background-image: linear-gradient(0deg, #eeff53, #29b6f6);*/
+    background-image: url(./assets/images/scenic-view.jpg); 
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .snow {
-    background-image: linear-gradient(0deg, #b2ebf2, #26c6da);
+    /*background-image: linear-gradient(0deg, #b2ebf2, #d5dbdf);*/
+    background-image: url(./assets/images/white-snowy.jpg); 
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .rain {
-    background-image: linear-gradient(0deg, #c5cae9, #5c6bc0);
+    /*background-image: linear-gradient(0deg, #9e9ea0, #43444b);*/
+    background-image: url(./assets/images/rainDay3.jpg); 
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .thunderstorm {
-    background-image: linear-gradient(0deg, #e0e0e0, #757575);
+    /*background-image: linear-gradient(0deg, #2a27d3, #000000);*/
+    background-image: url(./assets/images/white-lightning-heating-mountain-53459.jpg); 
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 /* Grouping content
@@ -371,9 +375,9 @@ pre {
 }
 
 body {
-  background-color: #2e2e2e;
+  /*background-color: #2e2e2e;
   font-family: 'Arvo', serif;
-  color:white;
+  color:white;*/
 }
 
 
@@ -400,67 +404,6 @@ body {
 
 
 
-
-
-
-
-
-/*
-
-============================================================================================ 
-CSS Calculator pad/button design */
-
-/* .outcome {
-  height: 80px;
-  background-color: blue;
-  color: white;
-  font-weight: bold;
-  width: 100%;
-  background-image: url('./components/image/airsplat.png');
-} 
-
-.outcome p {
-  font-size: 3.5em;
-  margin-top: 1em;
-}
-
-.calculator-frame {
-  max-width: 500px;
-  height: 100px;
-  margin: auto;
-}
-.button {
-  display: block;
-  font-size: 2em;
-}
-
-button {
-  width: 25%;
-  height: 85px;
-  font-size: 2em;
-  font-weight: bold;
-  color: blue;
-  background-color: white;
-}
-
-.math h2 {
-  color: white;
-}
-.list-group-item a {
-  border: 20px black;
-
-}
-
-.list-group-item, 
-.nav-item  {
-  font-weight: bold;
-  font-size:  25px;
-  text-align: left;
-  padding-top: 5px;
-  border-color: black;
-  margin-bottom: 35px; */
-  
-  /* padding-bottom: 10px;  */
 
   .WeatherBar_weekDay__2QIjK {
     font-size: 12px;
@@ -787,8 +730,5 @@ template {
     transform: rotate(360deg);
   }
 }
-=======
- }
-
  
->>>>>>> 9d85dcb24179548dc351e6d3d88aab6bbe2f270f
+ 
