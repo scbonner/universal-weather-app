@@ -20,7 +20,7 @@
   } */
 
 
-  .appapp {
+  /*.appapp {
     background-image: url('../images/cloudy.jpg');
     background-size: cover;
     background-position: bottom;
@@ -117,7 +117,7 @@ h2 {
 html,
 body {
     align-items: center;
-    background-color: #f8f8f8 !important;
+    background-color: #ffffff !important;
     color: #333;
     display: flex;
     font-family: Arial, Helvetica, sans-serif;
@@ -256,7 +256,7 @@ body {
 }
 
 .cloudy {
-    background-image: linear-gradient(0deg, #bbdefb, #2196f3);
+    background-image: linear-gradient(0deg, #b3e5fc, #29b6f6);
 }
 
 .clear {
@@ -346,62 +346,8 @@ body {
 
 
 
-/*
 
-============================================================================================ 
-CSS Calculator pad/button design */
 
-/* .outcome {
-  height: 80px;
-  background-color: blue;
-  color: white;
-  font-weight: bold;
-  width: 100%;
-  background-image: url('./components/image/airsplat.png');
-} 
-
-.outcome p {
-  font-size: 3.5em;
-  margin-top: 1em;
-}
-
-.calculator-frame {
-  max-width: 500px;
-  height: 100px;
-  margin: auto;
-}
-.button {
-  display: block;
-  font-size: 2em;
-}
-
-button {
-  width: 25%;
-  height: 85px;
-  font-size: 2em;
-  font-weight: bold;
-  color: blue;
-  background-color: white;
-}
-
-.math h2 {
-  color: white;
-}
-.list-group-item a {
-  border: 20px black;
-
-}
-
-.list-group-item, 
-.nav-item  {
-  font-weight: bold;
-  font-size:  25px;
-  text-align: left;
-  padding-top: 5px;
-  border-color: black;
-  margin-bottom: 35px; */
-  
-  /* padding-bottom: 10px;  */
 
   .WeatherBar_weekDay__2QIjK {
     font-size: 12px;
