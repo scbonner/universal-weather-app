@@ -1,27 +1,27 @@
-import React, { Component } from "react";
+import React from "react";
 import axios from 'axios';
 // eslint-disable-next-line
-import Hourly from './components/Hourly'
+import ConvCelFaren from './components/ConvCelFaren';
 
 
 // class component
-class App extends Component {
-  // parameter
+export default class App extends React.Component {
   constructor(props) {
-    // parameter
     super(props);
-    // list of properties
+
+    // list of properties for this.state
     this.state = {
       data: [],
       location: "Charlotte",
       days: [],
       daysFull: [],
       temps: [],
-      // minTemps: [],
-      // maxTemps: [],
+      minTemps: [],
+      maxTemps: [],
       weather: [],
       displayIndex: 0,
-      icons: []
+      icons: [],
+      iconsPdays: []
       
     };
   }
@@ -31,9 +31,58 @@ class App extends Component {
     const url = this.buildUrlApi();
     console.log("api", url);
 
-    axios.get(url).then(response => {
+// get designated url response
+    axios.get(url)
+    .then(response => {
+
+// url captures response for days and hours 
+      let iconsD = [];
+      let iconsH = [];
+      let h = 0;
+      
+      for (var i = 0; i < 5; i++) {
+        let counter = 0;   // declaring the varible counter
+
+        while (counter < 8) {
+          iconsH[counter] = `${response.data.list[0].weather[0].icon}@01d.png`;
+            h++
+            counter ++;
+          
+          iconsH[h] = `${response.data.list[0].weather[0].icon}@02d.png`;
+            h++;
+            counter ++;
+          iconsH[h] = `${response.data.list[0].weather[0].icon}@03d.png`;
+             h++,
+             counter ++;
+          iconsH[h] = `${response.data.list[0].weather[0].icon}@04d.png`;
+              h++;
+              counter ++;
+          iconsH[h] = `${response.data.list[0].weather[0].icon}@09d.png`;
+              h++;
+              counter ++;
+          iconsH[h] = `${response.data.list[0].weather[0].icon}@10d.png`;
+              h++;
+              counter ++;
+          iconsH[h] = `${response.data.list[0].weather[0].icon}@11d.png`;
+              h++;
+              counter ++;
+          iconsH[h] = `${response.data.list[0].weather[0].icon}@13d.png`;
+              h++;
+              counter ++;       
+        }
+        console.log(iconsH.length);   // should be 8
+        console.log(response);
+
+        iconsD[i] = iconsH;
+        console.log(iconsD.length);   // should be 4 days total of 96 hrs
+        console.log(response);
+
+      }
+      console.log(response);
+
       this.setState({
-        data: response.data
+        data: response.data,
+        iconsPdays: iconsD
       });
 
       const currentData = this.currentData();
@@ -51,8 +100,8 @@ class App extends Component {
       const currentDayFull =
         dayOfWeekFull[new Date(currentData.dt_txt).getDay()];
       const currentTemp = Math.round(currentData.main.temp);
-      // const currentMinTemp = Math.round(currentData.main.temp_min);
-      // const currentMaxTemp = Math.round(currentData.main.temp_max);
+      const currentMinTemp = Math.round(currentData.main.temp_min);
+      const currentMaxTemp = Math.round(currentData.main.temp_max);
       const currentWeather =
         currentData.weather[0].main === "Clouds"
           ? "Cloudy"
@@ -71,8 +120,8 @@ class App extends Component {
         days.push(day);
         daysFull.push(dayFull);
         temps.push(Math.round(this.state.data.list[i].main.temp));
-        // minTemps.push(Math.round(this.state.data.list[i].main.temp_min));
-        // maxTemps.push(Math.round(this.state.data.list[i].main.temp_max));
+        minTemps.push(Math.round(this.state.data.list[i].main.temp_min));
+        maxTemps.push(Math.round(this.state.data.list[i].main.temp_max));
 
         if (this.state.data.list[i].weather[0].main === "Clouds") {
           weather.push("Cloudy");
@@ -202,9 +251,10 @@ class App extends Component {
     }
 
     return (
+      
       <div className={"widget ".concat(...background)}>
         <form onSubmit={this.changeLocation}>
-   <div className="inline-input">
+           <div className="inline-input">
             <i className="mdi mdi-magnify"></i>
             <input
               className="location-input"
@@ -216,31 +266,113 @@ class App extends Component {
           </div>
         </form>
 
-        <div className="main-display">
+DisplayIndex = () => {
+return (
+  <Router>
+    <div>
+      <ul>
+        <li>
+          <Link to="/">Temps</Link>
+        </li>
+        <li>
+          <Link to="/daysFull">DaysFull</Link>
+        </li>
+        <li>
+          <Link to="/weather">Weather</Link>
+        </li>
+        <li>
+          <Link to="/maxtemps">MaxTemps</Link>
+        </li>
+        <li>
+        <Link to="/mintemps">MinTemps</Link>
+        </li>
+      </ul>
+    
+    <Switch>
+      <Route exact path='/'>
+        <Temps />
+      </Route>
+      <Route path="/daysfull">
+        <DaysFull />
+      </Route>
+      <Route path="/weather">
+        <Weather />
+      </Route>
+      <Route path="/maxtemps">
+        <MaxTemps />
+      </Route>
+      <Route path="/mintemps">
+        <MinTemps />
+      </Route>
+    </Switch>
+    </div>
+  </Router>
+);
+
+function Temps() {
+  return (
+    <div>
+      <h2>Temps</h2>
+    </div>
+  );
+}
+
+function DaysFull() {
+  return (
+    <div>
+      <h2>DaysFull</h2>
+    </div>
+  );
+}
+
+function Weather() {
+  return (
+    <div>
+      <h2>Weather</h2>
+    </div>
+  );
+}
+function MaxTemps() {
+  return (
+    <div>
+      <h2>MaxTemps</h2>
+    </div>
+  );
+}
+
+function MinTemps() {
+  return (
+    <div>
+      <h2>MinTemps</h2>
+    </div>
+  );
+}
+
+}
+        {/* <div className="main-display">
           <div className="main-info">
             <div className="temp-measurement">{temps[displayIndex]}</div>
             <div className="temp-unit">°F</div>
           </div>
-
+        </div>
           <div className="sub-info">
             <div className="sub-info-title">{daysFull[displayIndex]}</div>
 
             <div className="sub-info-text">{weather[displayIndex]}</div>
 
-            {/* <div className="sub-info-text">
-              <span className="max-temp">
+             <div className="sub-info-text"> 
+               <span className="max-temp">
                 <i className="mdi mdi-arrow-up" />
                 {maxTemps[displayIndex]}
-                °C
-              </span>
-              <span className="min-temp">
+                °F
+               </span>
+               <span className="min-temp">
                 <i className="mdi mdi-arrow-down" />
                 {minTemps[displayIndex]}
-                °C
-              </span>
-            </div> */}
+                °F
+              </span> 
           </div>
-        </div>
+        </div>  */}
 
         <div className="selection-panel">
           <div className="selection-row">
@@ -264,10 +396,12 @@ class App extends Component {
                   >
                     <i className={"mdi mdi-".concat(item)} />
                   </div>
+                )
                 );
               }
             })}
           </div>
+          
           <div className="selection-row">
             {days.map((item, index) => {
               if (displayIndex === index) {
@@ -288,15 +422,13 @@ class App extends Component {
                     onClick={() => this.setIndex(index)}
                   >
                     {item}
-                  </div>
+                </div> 
+    
+                 
+             
                 );
-              }
-            })}
-          </div>
-        </div>
-      </div>
-   );
-  }
-}
+       
+   }
+  
  
-export default App; 
+export default App  

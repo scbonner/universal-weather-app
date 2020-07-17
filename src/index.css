@@ -142,12 +142,12 @@ main {
 }
 
 
-.app {
+/* .app {
    background-image: url('../src/assets/images/umbrella_sunshine.jpg');
     background-size: cover;
     background-position: bottom;
     transition: 0.4s ease;
-  }
+  } */
 
 .app.warm {
     background-image: url("../src/assets/icons/iconfinder_forecast_sun_weather_3763531.png");
@@ -176,20 +176,10 @@ main {
 main {
   display: block;
 }
-
-
- html {
-    align-items: center;
-    background-image: url(./assets/images/umbrella_sunshine.jpg); 
-    background-position: no-repeat;
-    background: !important;
-  
-    color: #333;
-    display: flex;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 1.3em;
-    justify-content: center;
+.converter {
+  font-family: sans-serif;
     text-align: center;
+
 }
 
 .App {
