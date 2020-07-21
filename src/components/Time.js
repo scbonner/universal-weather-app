@@ -39,6 +39,7 @@ class Time extends React.Component {
     });
     
     this.setState(prevState => ({
+      // eslint-disable-next-line
       css: (prevState.css=='clickedclock')?'':'clickedclock'
     }));
   }
@@ -52,8 +53,8 @@ class Time extends React.Component {
            );
   }
 }
-
-function animateClock(){
+// eslint-disable-next-line
+function animateClock() {
   document.getElementById('clockwrapper').className = 'clocktick';
 }
 
