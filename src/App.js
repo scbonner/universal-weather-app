@@ -5,14 +5,14 @@ import ConvCelFaren from './components/ConvCelFaren';
 
 
 // class component
-export default class App extends React.Component {
+class App extends React.Component {
   constructor(props) {
     super(props);
 
     // list of properties for this.state
     this.state = {
       data: [],
-      location: "Charlotte",
+      location: "Chicago",
       days: [],
       daysFull: [],
       temps: [],
@@ -21,7 +21,7 @@ export default class App extends React.Component {
       weather: [],
       displayIndex: 0,
       icons: [],
-      iconsPdays: []
+      // iconsPdays: []
       
     };
   }
@@ -34,56 +34,59 @@ export default class App extends React.Component {
 // get designated url response
     axios.get(url)
     .then(response => {
+      this.setState({
+        data: response.data
+      });
 
 // url captures response for days and hours 
-      let iconsD = [];
-      let iconsH = [];
-      let h = 0;
+      // let iconsD = [];
+      // let iconsH = [];
+      // let h = 0;
       
-      for (var i = 0; i < 5; i++) {
-        let counter = 0;   // declaring the varible counter
+      // for (var i = 0; i < 5; i++) {
+      //   let counter = 0;   // declaring the varible counter
 
-        while (counter < 8) {
-          iconsH[counter] = `${response.data.list[0].weather[0].icon}@01d.png`;
-            h++
-            counter ++;
+      //   while (counter < 8) {
+      //     iconsH[counter] = `${response.data.list[0].weather[0].icon}@01d.png`;
+      //       h++
+      //       counter ++;
           
-          iconsH[h] = `${response.data.list[0].weather[0].icon}@02d.png`;
-            h++;
-            counter ++;
-          iconsH[h] = `${response.data.list[0].weather[0].icon}@03d.png`;
-             h++,
-             counter ++;
-          iconsH[h] = `${response.data.list[0].weather[0].icon}@04d.png`;
-              h++;
-              counter ++;
-          iconsH[h] = `${response.data.list[0].weather[0].icon}@09d.png`;
-              h++;
-              counter ++;
-          iconsH[h] = `${response.data.list[0].weather[0].icon}@10d.png`;
-              h++;
-              counter ++;
-          iconsH[h] = `${response.data.list[0].weather[0].icon}@11d.png`;
-              h++;
-              counter ++;
-          iconsH[h] = `${response.data.list[0].weather[0].icon}@13d.png`;
-              h++;
-              counter ++;       
-        }
-        console.log(iconsH.length);   // should be 8
-        console.log(response);
+      //     iconsH[h] = `${response.data.list[0].weather[0].icon}@02d.png`;
+      //       h++;
+      //       counter ++;
+      //     iconsH[h] = `${response.data.list[0].weather[0].icon}@03d.png`;
+      //        h++,
+      //        counter ++;
+      //     iconsH[h] = `${response.data.list[0].weather[0].icon}@04d.png`;
+      //         h++;
+      //         counter ++;
+      //     iconsH[h] = `${response.data.list[0].weather[0].icon}@09d.png`;
+      //         h++;
+      //         counter ++;
+      //     iconsH[h] = `${response.data.list[0].weather[0].icon}@10d.png`;
+      //         h++;
+      //         counter ++;
+      //     iconsH[h] = `${response.data.list[0].weather[0].icon}@11d.png`;
+      //         h++;
+      //         counter ++;
+      //     iconsH[h] = `${response.data.list[0].weather[0].icon}@13d.png`;
+      //         h++;
+      //         counter ++;       
+      //   }
+      //   console.log(iconsH.length);   // should be 8
+      //   console.log(response);
 
-        iconsD[i] = iconsH;
-        console.log(iconsD.length);   // should be 4 days total of 96 hrs
-        console.log(response);
+      //   iconsD[i] = iconsH;
+      //   console.log(iconsD.length);   // should be 4 days total of 96 hrs
+      //   console.log(response);
 
-      }
-      console.log(response);
+      // }
+      // console.log(response);
 
-      this.setState({
-        data: response.data,
-        iconsPdays: iconsD
-      });
+      // this.setState({
+      //   data: response.data,
+      //   iconsPdays: iconsD
+      // });
 
       const currentData = this.currentData();
       const dayOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
@@ -96,11 +99,13 @@ export default class App extends React.Component {
         "Friday",
         "Saturday"
       ];
-      const currentDay = "Today";
+      const toDay = "Today";
       const currentDayFull =
         dayOfWeekFull[new Date(currentData.dt_txt).getDay()];
       const currentTemp = Math.round(currentData.main.temp);
+      // eslint-disable-next-line
       const currentMinTemp = Math.round(currentData.main.temp_min);
+      // eslint-disable-next-line
       const currentMaxTemp = Math.round(currentData.main.temp_max);
       const currentWeather =
         currentData.weather[0].main === "Clouds"
@@ -111,6 +116,8 @@ export default class App extends React.Component {
       const days = [];
       const daysFull = [];
       const temps = [];
+      const minTemps = [];
+      const maxTemps = [];
       const weather = [];
       const icons = [];
       for (let i = 0; i < this.state.data.list.length; i = i + 8) {
@@ -135,7 +142,7 @@ export default class App extends React.Component {
       }
 
       this.setState({
-        days: [currentDay, ...days.slice(1)],
+        days: [toDay, ...days.slice(1)],
         daysFull: [currentDayFull, ...daysFull.slice(1)],
         temps: [currentTemp, ...temps.slice(1)],
         weather: [currentWeather, ...weather.slice(1)],
@@ -221,6 +228,8 @@ export default class App extends React.Component {
       days,
       daysFull,
       temps,
+      minTemps,
+      maxTemps,
       weather,
       icons,
       displayIndex
@@ -266,7 +275,7 @@ export default class App extends React.Component {
           </div>
         </form>
 
-DisplayIndex = () => {
+{/* const DisplayIndex = () => {
 return (
   <Router>
     <div>
@@ -346,21 +355,21 @@ function MinTemps() {
       <h2>MinTemps</h2>
     </div>
   );
-}
+} */}
 
-}
-        {/* <div className="main-display">
+
+        <div className="main-display">
           <div className="main-info">
             <div className="temp-measurement">{temps[displayIndex]}</div>
             <div className="temp-unit">°F</div>
           </div>
-        </div>
+      
           <div className="sub-info">
             <div className="sub-info-title">{daysFull[displayIndex]}</div>
 
             <div className="sub-info-text">{weather[displayIndex]}</div>
 
-             <div className="sub-info-text"> 
+            <div className="sub-info-text"> 
                <span className="max-temp">
                 <i className="mdi mdi-arrow-up" />
                 {maxTemps[displayIndex]}
@@ -371,9 +380,10 @@ function MinTemps() {
                 {minTemps[displayIndex]}
                 °F
               </span> 
-          </div>
-        </div>  */}
-
+          </div> 
+        </div>  
+      </div>
+    
         <div className="selection-panel">
           <div className="selection-row">
             {icons.map((item, index) => {
@@ -397,11 +407,10 @@ function MinTemps() {
                     <i className={"mdi mdi-".concat(item)} />
                   </div>
                 )
-                );
+                
               }
             })}
           </div>
-          
           <div className="selection-row">
             {days.map((item, index) => {
               if (displayIndex === index) {
@@ -423,12 +432,17 @@ function MinTemps() {
                   >
                     {item}
                 </div> 
-    
-                 
-             
                 );
+              }
+            })}
+            </div>
+           </div>
+          <ConvCelFaren />
+          </div>                              
+    );
+  }
        
-   }
+}
   
  
 export default App  
