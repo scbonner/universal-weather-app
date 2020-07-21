@@ -1,6 +1,7 @@
 import React, { Component } from "react"
 
 
+
 class ConvCelFaren extends Component {
     constructor() {
         super();
@@ -10,25 +11,25 @@ class ConvCelFaren extends Component {
 
         };
     }
+    
     // conversion of methods
-    doConversionOf(temperature, convert) {
+    doConvert(temperature, convert) {
     //  function checks if the first character in the specified string is a number. If it is, it continues to parses the string until it reaches the end of the number, & returns  number as a number, not a string.
       const input = parseFloat(temperature);
       if (Number.isNaN(input)) {
         return "";
       }
-      console.log(input);
 
       const output = convert(input);
       const rounded = Math.round(output * 1000) / 1000;
       return rounded.toString();
     }   
   
-    intoCelsius(fahrenheit) {
+    toCelsius(fahrenheit) {
         return ((fahrenheit - 32) * 5) / 9;
     }
   
-    intoFahrenheit(celsius) {
+    toFahrenheit(celsius) {
         return (celsius * 9) / 5 + 32;
     }
 
@@ -36,8 +37,8 @@ class ConvCelFaren extends Component {
       const { scale, temperature } = this.state;
       const result =
         scale === "F"
-          ? this.doConversionOf(temperature, this.toCelsius)
-          : this.doConversionOf(temperature, this.toFahrenheit);
+          ? this.doConvert(temperature, this.toCelsius)
+          : this.doConvert(temperature, this.toFahrenheit);
       const oppositeScale = scale === "F" ? "C" : "F";
   
       return `${result} degrees in ${oppositeScale}`;
@@ -52,18 +53,21 @@ class ConvCelFaren extends Component {
   
       return (
         <div className="converter">
-        {/* <div className="App"> */}
+          <hr />
+          <br />
           <h1>Celsius vs Fahrenheit?</h1>
-          <p>They both measrue the same thing... temperature; however, use different numbers such as: Boiling water (at normal pressure) that measures 100° in Celsius or 212° in Fahrenheit. As water freezes it measues 0° and 32° in Fahrenheit</p>
+          <div className="paragraph">
+            <p>Celsius and Fahrenheit both measrue the same thing, temperature. However, display different number spectrums, such as: Boiling water (at normal pressure) that measures 100° in Celsius or 212° in Fahrenheit. As water freezes it measues 0° and 32° in Fahrenheit.</p> 
+          </div>
+          <br />
           
-          <ul class="list-group">        
-            <li className="list-group-item">
-                <p>A link has been provided to inform and educate in mored detail. The title, "Difference Between Celsius and Fahrenheit:" 
-                <a href="https://biodifferences.com/difference-between-celsius-and-fahrenheit.html/">Scholastic</a></p>
-            </li>
-          </ul>        
-  
-          {/* <button type="Fahrenheit">F </button> */}
+          <div className="container">
+            <p>We have provided a link for your convenience <a href="https://biodifferences.com/difference-between-celsius-and-fahrenheit.html/">Scholastic</a> to better inform and educate you in detail.</p>
+          </div>
+            <br />
+            <hr />
+            <br />
+          <div className="text">
           <label>Select a scale to convert to:</label>
           <input
             type="radio"
@@ -73,7 +77,7 @@ class ConvCelFaren extends Component {
             onChange={this.handleChange}
             checked={this.state.scale === "F"}
           />
-          <label for="f">Fahrenheit</label>
+          <label htmlFor="f">Fahrenheit</label>
           <input
             type="radio"
             id="c"
@@ -82,7 +86,7 @@ class ConvCelFaren extends Component {
             onChange={this.handleChange}
             checked={this.state.scale === "C"}
           />
-          <label for="c">Celcius</label>
+          <label htmlFor="c">Celcius</label>
           <br />
           <br />
           <label>Please Enter a Number: </label>
@@ -95,13 +99,15 @@ class ConvCelFaren extends Component {
           <br />
   
           <div>
-            {this.state.temperature} degrees {this.state.scale} is equal to{" "}
+            {this.state.temperature} degrees 
+            {this.state.scale} is equal to{" "}
             {this.getResult()}
           </div>
         </div>
+      </div>
       );
     
-      }
+  }
 }
   export default ConvCelFaren;
   
