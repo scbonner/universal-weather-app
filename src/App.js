@@ -2,6 +2,7 @@ import React from "react";
 import axios from 'axios';
 // eslint-disable-next-line
 import ConvCelFaren from './components/ConvCelFaren';
+import Time from './components/Time';
 
 
 // class component
@@ -437,6 +438,8 @@ function MinTemps() {
             })}
             </div>
            </div>
+          
+          <Time />
           <ConvCelFaren />
           </div>                              
     );

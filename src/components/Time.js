@@ -2,12 +2,12 @@ import React from 'react';
 
 
 
-class ReactClock extends React.Component {
+class Time extends React.Component {
   
   constructor(props) {
     super(props);
     this.state = {date : new Date(), 
-                  label: 'ReactJS Clock', 
+                  // label: 'ReactJS Clock', 
                   css  : 'empty'};
     
     // This binding is necessary to make `this` work in the callback
@@ -34,7 +34,7 @@ class ReactClock extends React.Component {
   
   handleClick(){
     this.setState({
-      label: 'Clicked!',
+      // label: 'Clicked!',
       css  : 'clickedclock'
     });
     
@@ -47,7 +47,7 @@ class ReactClock extends React.Component {
     return (
             <div id="clockwrapper" className={this.state.css} onClick={this.handleClick}>
               <h1>{this.state.date.toLocaleTimeString()}</h1>
-              <h2>{this.state.label}</h2>
+              {/* <h2>{this.state.label}</h2> */}
             </div>
            );
   }
@@ -60,12 +60,14 @@ function animateClock(){
 //Render only one ReactButton component
 function tickTheClock(){
   //Render clock
-  React.render(<ReactClock />, document.getElementById('root'));
+  // React.render(<Time />, document.getElementById('root'));
   
   
   /*Render animation
   animateClock();*/
 }
+export default Time;
+  
 
 setInterval(tickTheClock, 1000);
 
