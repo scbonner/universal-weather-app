@@ -1,4 +1,6 @@
 import React from 'react';
+// eslint-disable-next-line
+import moment from "moment";
 
 
 class Time extends React.Component {
@@ -12,6 +14,7 @@ class Time extends React.Component {
     // This binding is necessary to make `this` work in the callback
     this.handleClick = this.handleClick.bind(this);
   }
+  
   
   //Lifecycle hooks
   componentDidMount() {
@@ -33,7 +36,7 @@ class Time extends React.Component {
   
   handleClick(){
     this.setState({
-      label: 'Clicked!',
+      label: 'Eastern Daylight Time',
       css  : 'clickedclock'
     });
     
@@ -59,8 +62,12 @@ function animateClock() {
 
 //Render only one ReactButton component
 function tickTheClock(){
-    
+
+  
+  
 }
+
+
 export default Time;
   
 

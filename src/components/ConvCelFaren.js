@@ -57,12 +57,11 @@ class ConvCelFaren extends Component {
           <br />
           <h1>Celsius vs Fahrenheit?</h1>
           <div className="paragraph">
-            <p>Celsius and Fahrenheit both measrue the same thing, temperature. However, display different number spectrums, such as: Boiling water (at normal pressure) that measures 100° in Celsius or 212° in Fahrenheit. As water freezes it measues 0° and 32° in Fahrenheit.</p> 
+            <p>Celsius and Fahrenheit both measrue temperature. However, the display of the number spectrums, such as:  Boiling water (at normal pressure) that measures 100° in Celsius or 212° in Fahrenheit. As water freezes it measues 0° and 32° in Fahrenheit.</p> 
           </div>
           <br />
-          
           <div className="container">
-            <p>We have provided a link for your convenience <a href="https://biodifferences.com/difference-between-celsius-and-fahrenheit.html/">Scholastic</a> to better inform and educate you in detail.</p>
+            <p>To help you better understand their significance and differences, we have provided a link <a href="https://biodifferences.com/difference-between-celsius-and-fahrenheit.html/">Temperature</a> that shares more detail.</p>
           </div>
             <br />
             <hr />

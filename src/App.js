@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import axios from 'axios';
 // eslint-disable-next-line
 import ConvCelFaren from './components/ConvCelFaren';
@@ -17,8 +17,8 @@ class App extends React.Component {
       days: [],
       daysFull: [],
       temps: [],
-      minTemps: [],
-      maxTemps: [],
+      // minTemps: [],
+      // maxTemps: [],
       weather: [],
       displayIndex: 0,
       icons: [],
@@ -105,9 +105,9 @@ class App extends React.Component {
         dayOfWeekFull[new Date(currentData.dt_txt).getDay()];
       const currentTemp = Math.round(currentData.main.temp);
       // eslint-disable-next-line
-      const currentMinTemp = Math.round(currentData.main.temp_min);
-      // eslint-disable-next-line
-      const currentMaxTemp = Math.round(currentData.main.temp_max);
+      // const currentMinTemp = Math.round(currentData.main.temp_min);
+      // // eslint-disable-next-line
+      // const currentMaxTemp = Math.round(currentData.main.temp_max);
       const currentWeather =
         currentData.weather[0].main === "Clouds"
           ? "Cloudy"
@@ -117,8 +117,8 @@ class App extends React.Component {
       const days = [];
       const daysFull = [];
       const temps = [];
-      const minTemps = [];
-      const maxTemps = [];
+      // const minTemps = [];
+      // const maxTemps = [];
       const weather = [];
       const icons = [];
       for (let i = 0; i < this.state.data.list.length; i = i + 8) {
@@ -128,8 +128,8 @@ class App extends React.Component {
         days.push(day);
         daysFull.push(dayFull);
         temps.push(Math.round(this.state.data.list[i].main.temp));
-        minTemps.push(Math.round(this.state.data.list[i].main.temp_min));
-        maxTemps.push(Math.round(this.state.data.list[i].main.temp_max));
+        // minTemps.push(Math.round(this.state.data.list[i].main.temp_min));
+        // maxTemps.push(Math.round(this.state.data.list[i].main.temp_max));
 
         if (this.state.data.list[i].weather[0].main === "Clouds") {
           weather.push("Cloudy");
@@ -156,10 +156,9 @@ class App extends React.Component {
     const location = encodeURIComponent(this.state.location);
     const urlPrefix = "https://api.openweathermap.org/data/2.5/forecast?q=";
     const urlSuffix = "&APPID=f85311cfd835af0ddbba1d6d1784427f&units=imperial";
-    
-     
     return [urlPrefix, location, urlSuffix].join("");
   };
+  
 
   currentData = () => {
     const list = this.state.data.list;
@@ -229,8 +228,8 @@ class App extends React.Component {
       days,
       daysFull,
       temps,
-      minTemps,
-      maxTemps,
+      // minTemps,
+      // maxTemps,
       weather,
       icons,
       displayIndex
@@ -261,7 +260,7 @@ class App extends React.Component {
     }
 
     return (
-      
+      <div className="container-weather">
       <div className={"widget ".concat(...background)}>
         <form onSubmit={this.changeLocation}>
            <div className="inline-input">
@@ -276,101 +275,27 @@ class App extends React.Component {
           </div>
         </form>
 
-{/* const DisplayIndex = () => {
-return (
-  <Router>
-    <div>
-      <ul>
-        <li>
-          <Link to="/">Temps</Link>
-        </li>
-        <li>
-          <Link to="/daysFull">DaysFull</Link>
-        </li>
-        <li>
-          <Link to="/weather">Weather</Link>
-        </li>
-        <li>
-          <Link to="/maxtemps">MaxTemps</Link>
-        </li>
-        <li>
-        <Link to="/mintemps">MinTemps</Link>
-        </li>
-      </ul>
-    
-    <Switch>
-      <Route exact path='/'>
-        <Temps />
-      </Route>
-      <Route path="/daysfull">
-        <DaysFull />
-      </Route>
-      <Route path="/weather">
-        <Weather />
-      </Route>
-      <Route path="/maxtemps">
-        <MaxTemps />
-      </Route>
-      <Route path="/mintemps">
-        <MinTemps />
-      </Route>
-    </Switch>
-    </div>
-  </Router>
-);
-
-function Temps() {
-  return (
-    <div>
-      <h2>Temps</h2>
-    </div>
-  );
-}
-
-function DaysFull() {
-  return (
-    <div>
-      <h2>DaysFull</h2>
-    </div>
-  );
-}
-
-function Weather() {
-  return (
-    <div>
-      <h2>Weather</h2>
-    </div>
-  );
-}
-function MaxTemps() {
-  return (
-    <div>
-      <h2>MaxTemps</h2>
-    </div>
-  );
-}
-
-function MinTemps() {
-  return (
-    <div>
-      <h2>MinTemps</h2>
-    </div>
-  );
-} */}
-
 
         <div className="main-display">
           <div className="main-info">
             <div className="temp-measurement">{temps[displayIndex]}</div>
             <div className="temp-unit">°F</div>
           </div>
+
+          {/* <div className="main-display">
+          <div className="main-info">
+            <div className="temp-measurement">{temps[displayIndex]}</div>
+            <div className="temp-unit">°C</div>
+          </div> */}
+
+          
       
           <div className="sub-info">
             <div className="sub-info-title">{daysFull[displayIndex]}</div>
 
             <div className="sub-info-text">{weather[displayIndex]}</div>
 
-            <div className="sub-info-text"> 
+            {/* <div className="sub-info-text"> 
                <span className="max-temp">
                 <i className="mdi mdi-arrow-up" />
                 {maxTemps[displayIndex]}
@@ -381,7 +306,7 @@ function MinTemps() {
                 {minTemps[displayIndex]}
                 °F
               </span> 
-          </div> 
+          </div>  */}
         </div>  
       </div>
     
@@ -441,7 +366,9 @@ function MinTemps() {
           
           <Time />
           <ConvCelFaren />
-          </div>                              
+         </div>
+         </div>
+                                  
     );
   }
        
