@@ -1,7 +1,12 @@
 import React from 'react';
 import axios from 'axios';
+// import {
+//   BrowserRouter,
+//   Route
+// } from 'react-router-dom';
 // eslint-disable-next-line
 import ConvCelFaren from './components/ConvCelFaren';
+// import Hourly from './components/Hourly';
 import Time from './components/Time';
 
 
@@ -17,8 +22,6 @@ class App extends React.Component {
       days: [],
       daysFull: [],
       temps: [],
-      // minTemps: [],
-      // maxTemps: [],
       weather: [],
       displayIndex: 0,
       icons: [],
@@ -39,56 +42,6 @@ class App extends React.Component {
         data: response.data
       });
 
-// url captures response for days and hours 
-      // let iconsD = [];
-      // let iconsH = [];
-      // let h = 0;
-      
-      // for (var i = 0; i < 5; i++) {
-      //   let counter = 0;   // declaring the varible counter
-
-      //   while (counter < 8) {
-      //     iconsH[counter] = `${response.data.list[0].weather[0].icon}@01d.png`;
-      //       h++
-      //       counter ++;
-          
-      //     iconsH[h] = `${response.data.list[0].weather[0].icon}@02d.png`;
-      //       h++;
-      //       counter ++;
-      //     iconsH[h] = `${response.data.list[0].weather[0].icon}@03d.png`;
-      //        h++,
-      //        counter ++;
-      //     iconsH[h] = `${response.data.list[0].weather[0].icon}@04d.png`;
-      //         h++;
-      //         counter ++;
-      //     iconsH[h] = `${response.data.list[0].weather[0].icon}@09d.png`;
-      //         h++;
-      //         counter ++;
-      //     iconsH[h] = `${response.data.list[0].weather[0].icon}@10d.png`;
-      //         h++;
-      //         counter ++;
-      //     iconsH[h] = `${response.data.list[0].weather[0].icon}@11d.png`;
-      //         h++;
-      //         counter ++;
-      //     iconsH[h] = `${response.data.list[0].weather[0].icon}@13d.png`;
-      //         h++;
-      //         counter ++;       
-      //   }
-      //   console.log(iconsH.length);   // should be 8
-      //   console.log(response);
-
-      //   iconsD[i] = iconsH;
-      //   console.log(iconsD.length);   // should be 4 days total of 96 hrs
-      //   console.log(response);
-
-      // }
-      // console.log(response);
-
-      // this.setState({
-      //   data: response.data,
-      //   iconsPdays: iconsD
-      // });
-
       const currentData = this.currentData();
       const dayOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
       const dayOfWeekFull = [
@@ -104,10 +57,6 @@ class App extends React.Component {
       const currentDayFull =
         dayOfWeekFull[new Date(currentData.dt_txt).getDay()];
       const currentTemp = Math.round(currentData.main.temp);
-      // eslint-disable-next-line
-      // const currentMinTemp = Math.round(currentData.main.temp_min);
-      // // eslint-disable-next-line
-      // const currentMaxTemp = Math.round(currentData.main.temp_max);
       const currentWeather =
         currentData.weather[0].main === "Clouds"
           ? "Cloudy"
@@ -117,8 +66,6 @@ class App extends React.Component {
       const days = [];
       const daysFull = [];
       const temps = [];
-      // const minTemps = [];
-      // const maxTemps = [];
       const weather = [];
       const icons = [];
       for (let i = 0; i < this.state.data.list.length; i = i + 8) {
@@ -128,9 +75,6 @@ class App extends React.Component {
         days.push(day);
         daysFull.push(dayFull);
         temps.push(Math.round(this.state.data.list[i].main.temp));
-        // minTemps.push(Math.round(this.state.data.list[i].main.temp_min));
-        // maxTemps.push(Math.round(this.state.data.list[i].main.temp_max));
-
         if (this.state.data.list[i].weather[0].main === "Clouds") {
           weather.push("Cloudy");
         } else {
@@ -228,8 +172,6 @@ class App extends React.Component {
       days,
       daysFull,
       temps,
-      // minTemps,
-      // maxTemps,
       weather,
       icons,
       displayIndex
@@ -280,34 +222,13 @@ class App extends React.Component {
           <div className="main-info">
             <div className="temp-measurement">{temps[displayIndex]}</div>
             <div className="temp-unit">°F</div>
-          </div>
-
-          {/* <div className="main-display">
-          <div className="main-info">
-            <div className="temp-measurement">{temps[displayIndex]}</div>
-            <div className="temp-unit">°C</div>
-          </div> */}
-
-          
+          </div>        
       
           <div className="sub-info">
             <div className="sub-info-title">{daysFull[displayIndex]}</div>
 
             <div className="sub-info-text">{weather[displayIndex]}</div>
-
-            {/* <div className="sub-info-text"> 
-               <span className="max-temp">
-                <i className="mdi mdi-arrow-up" />
-                {maxTemps[displayIndex]}
-                °F
-               </span>
-               <span className="min-temp">
-                <i className="mdi mdi-arrow-down" />
-                {minTemps[displayIndex]}
-                °F
-              </span> 
-          </div>  */}
-        </div>  
+           </div>  
       </div>
     
         <div className="selection-panel">
@@ -363,16 +284,28 @@ class App extends React.Component {
             })}
             </div>
            </div>
+
           
-          <Time />
+          
           <ConvCelFaren />
+          {/* <Hourly /> */}
+          <Time />
+        
          </div>
-         </div>
-                                  
+         </div>                               
     );
   }
        
 }
+// const Components = () => (
+//   <BrowserRouter>
+//     <div className="container">
+//       <Route path='/time' component={Time} />
+//       <Route path='/convcelfaren' component={ConvCelFaren} />
+//     </div>
+//   </BrowserRouter>
+//   )
+      
   
  
 export default App  
