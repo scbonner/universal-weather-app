@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import './index.css';
 // import {
 //   BrowserRouter,
 //   Route
@@ -18,7 +19,7 @@ class App extends React.Component {
     // list of properties for this.state
     this.state = {
       data: [],
-      location: "Chicago",
+      location: " ",
       days: [],
       daysFull: [],
       temps: [],
@@ -102,7 +103,7 @@ class App extends React.Component {
     const urlSuffix = "&APPID=f85311cfd835af0ddbba1d6d1784427f&units=imperial";
     return [urlPrefix, location, urlSuffix].join("");
   };
-  
+    
 
   currentData = () => {
     const list = this.state.data.list;
@@ -287,9 +288,9 @@ class App extends React.Component {
 
           
           
-          <ConvCelFaren />
+           <ConvCelFaren /> 
           {/* <Hourly /> */}
-          <Time />
+           <Time /> 
         
          </div>
          </div>                               
@@ -297,14 +298,20 @@ class App extends React.Component {
   }
        
 }
+// export default function App() {
+//   return (
+//     <div>
+//       <Route path="/" component={Home} />
+//     </div>
+//   );
+// }
 // const Components = () => (
 //   <BrowserRouter>
-//     <div className="container">
 //       <Route path='/time' component={Time} />
 //       <Route path='/convcelfaren' component={ConvCelFaren} />
-//     </div>
 //   </BrowserRouter>
-//   )
+  
+
       
   
  

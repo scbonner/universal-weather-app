@@ -57,7 +57,7 @@ class ConvCelFaren extends Component {
           <br />
           <h1>Celsius vs Fahrenheit?</h1>
           <div className="paragraph">
-            <p>Celsius and Fahrenheit both measrue temperature. However, the display of the number spectrums, such as:  Boiling water (at normal pressure) that measures 100° Celsius or 212° Fahrenheit. As water freezes it measures at 0°C and 32°F.</p> 
+            <p>Celsius and Fahrenheit both measrue temperature. However, the display of the number spectrums, such as:  Boiling water (at normal pressure) that measures 100°C or 212°F.As water freezes it measures at 0°C and 32°F.</p> 
           </div>
           <br />
           <div className="container">
