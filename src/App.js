@@ -1,13 +1,10 @@
 import React from 'react';
 import axios from 'axios';
 import './index.css';
-// import {
-//   BrowserRouter,
-//   Route
-// } from 'react-router-dom';
 // eslint-disable-next-line
 import ConvCelFaren from './components/ConvCelFaren';
-// import Hourly from './components/Hourly';
+// import ErrorBoundary from './components/ErrorBoundary'
+import Hourly from './components/Hourly';
 import Time from './components/Time';
 
 
@@ -19,7 +16,7 @@ class App extends React.Component {
     // list of properties for this.state
     this.state = {
       data: [],
-      location: " ",
+      location: "Charlotte",
       days: [],
       daysFull: [],
       temps: [],
@@ -270,6 +267,8 @@ class App extends React.Component {
                   >
                     {item}
                   </div>
+            
+                  
                 );
               } else {
                 return (
@@ -289,7 +288,8 @@ class App extends React.Component {
           
           
            <ConvCelFaren /> 
-          {/* <Hourly /> */}
+           {/* <ErrorBoundary /> */}
+           <Hourly /> 
            <Time /> 
         
          </div>
@@ -298,20 +298,6 @@ class App extends React.Component {
   }
        
 }
-// export default function App() {
-//   return (
-//     <div>
-//       <Route path="/" component={Home} />
-//     </div>
-//   );
-// }
-// const Components = () => (
-//   <BrowserRouter>
-//       <Route path='/time' component={Time} />
-//       <Route path='/convcelfaren' component={ConvCelFaren} />
-//   </BrowserRouter>
-  
-
       
   
  

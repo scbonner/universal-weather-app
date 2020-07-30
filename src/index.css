@@ -169,7 +169,9 @@ main {
    ========================================================================== */
 
 
-
+.hourly {
+  color: black;
+}
 /**
  * Render the `main` element consistently in IE.
  */
