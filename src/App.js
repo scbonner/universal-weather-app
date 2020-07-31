@@ -19,12 +19,10 @@ class App extends React.Component {
     // list of properties for this.state
     this.state = {
       data: [],
-      location: "Chicago",
+      location: "Charlotte",
       days: [],
       daysFull: [],
       temps: [],
-      // minTemps: [],
-      // maxTemps: [],
       weather: [],
       displayIndex: 0,
       icons: [],
@@ -56,15 +54,13 @@ class App extends React.Component {
         "Friday",
         "Saturday",
       ];
+      
       const currentDay = new Date(currentData.dt_txt);
       const toDay = dayOfWeek[currentDay.getDay()];
       const currentDayFull =
         dayOfWeekFull[new Date(currentData.dt_txt).getDay()];
       const currentTemp = Math.round(currentData.main.temp);
-      // eslint-disable-next-line
-      // const currentMinTemp = Math.round(currentData.main.temp_min);
-      // // eslint-disable-next-line
-      // const currentMaxTemp = Math.round(currentData.main.temp_max);
+     
       const currentWeather =
         currentData.weather[0].main === "Clouds"
           ? "Cloudy"
@@ -87,8 +83,6 @@ class App extends React.Component {
         days.push(day);
         daysFull.push(dayFull);
         temps.push(Math.round(this.state.data.list[i].main.temp));
-        // minTemps.push(Math.round(this.state.data.list[i].main.temp_min));
-        // maxTemps.push(Math.round(this.state.data.list[i].main.temp_max));
 
         if (this.state.data.list[i].weather[0].main === "Clouds") {
           weather.push("Cloudy");
@@ -189,8 +183,6 @@ class App extends React.Component {
       days,
       daysFull,
       temps,
-      // minTemps,
-      // maxTemps,
       weather,
       iconCodes,
       displayIndex,
@@ -242,18 +234,16 @@ class App extends React.Component {
               <div className="temp-unit">°F</div>
             </div>
 
-            {/* <div className="main-display">
-          <div className="main-info">
-            <div className="temp-measurement">{temps[displayIndex]}</div>
-            <div className="temp-unit">°C</div>
-          </div> */}
 
             <div className="sub-info">
               <div className="sub-info-title">
                 <NavLink
                   activeClassName="selected"
                   className="selection-days"
-                  to={`/${daysFull[displayIndex]}`}
+                  to={{
+                  pathname: `/${daysFull[displayIndex]}`,
+                  state: {city: this.state.location}
+                  }}
                   // onClick={() => this.setIndex(index)}
                 >
                   {daysFull[displayIndex]}
@@ -262,18 +252,7 @@ class App extends React.Component {
 
               <div className="sub-info-text">{weather[displayIndex]}</div>
 
-              {/* <div className="sub-info-text"> 
-               <span className="max-temp">
-                <i className="mdi mdi-arrow-up" />
-                {maxTemps[displayIndex]}
-                °F
-               </span>
-               <span className="min-temp">
-                <i className="mdi mdi-arrow-down" />
-                {minTemps[displayIndex]}
-                °F
-              </span> 
-          </div>  */}
+             
             </div>
           </div>
 
@@ -310,7 +289,7 @@ class App extends React.Component {
               })}
             </div>
           </div>
-      {/* two lines below will render and disply each component  */}
+      {/* two lines below will render and disply each component on landing */}
           <Time />
           <ConvCelFaren />
         </div>

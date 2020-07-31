@@ -19,7 +19,7 @@ class Hourly extends Component {
     // list of properties
     this.state = {
       data: [],
-      location: "Charlotte",
+      location: this.props.location.state.city || "Charlotte",
       hours: [],
       temps: [],
       iconCodes: [],
@@ -29,7 +29,7 @@ class Hourly extends Component {
   // function place to set up url
   fetchData = () => {
     const url = this.buildUrlApi();
-    console.log("FETCH GOT HIT", this.state.location);
+    console.log("FETCH GOT HIT", this.props.location.state.city);
     axios.get(url).then((response) => {
       this.setState({
         data: response.data,
@@ -103,12 +103,13 @@ class Hourly extends Component {
       temps, 
       iconCodes, 
       displayIndex, 
+      // eslint-disable-next-line
       location 
     } = this.state;
 
     return (
       <div className="container-weather">
-        <div style={{ backgroundColor: "tan" }} className={"widget"}>
+        <div style={{ backgroundColor: "yellow" }} className={"widget"}>
           <div className="inline-input">
             <i className="mdi mdi-magnify"></i>
             <input
