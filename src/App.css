@@ -92,27 +92,7 @@ main {
 /**
  * Correct the font size and margin on `h1` elements within `section` and
  * `article` contexts in Chrome, Firefox, and Safari.
- */
-/* 
-h1 {
-  font-size: 50px;
-  /* font-style: ; */
-  /* color: blue;
-  margin-top: 30px;
-}
-
-div h1 {
-  color: black;
-  font-style: italic;
-}
-
-h2 {
-  font-size: 2.5em;
-  color: black;
-  font-weight: bold;
-  font-style: italic;
-  
-} */ 
+  */ 
 
 html,
 body {
@@ -338,16 +318,6 @@ body {
 .normal{
   color:#ff9933;
 }
-
-
-
-
-
-
-
-
-
-
 
   .WeatherBar_weekDay__2QIjK {
     font-size: 12px;
